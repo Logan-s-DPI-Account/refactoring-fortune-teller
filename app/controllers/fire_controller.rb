@@ -1,8 +1,12 @@
 class FireController < ApplicationController
   def ram
-    @horoscope = "As your professional dreams unfold, Aries, you may worry about the downside. First, there are new responsibilities that you might doubt your ability to fulfill. Second, you might be catapulted into an uncomfortable new realm of office politics. Don't let these matters put a damper on your enthusiasm. You have what it takes to fulfill the first concern and the wisdom to avoid the second.
-     Onward and upward."
-    
+  #   @horoscope = "As your professional dreams unfold, Aries, you may worry about the downside. First, there are new responsibilities that you might doubt your ability to fulfill. Second, you might be catapulted into an uncomfortable new realm of office politics. Don't let these matters put a damper on your enthusiasm. You have what it takes to fulfill the first concern and the wisdom to avoid the second.
+  #    Onward and upward."
+
+    all_zodiacs = Zodiac.list
+    @the_sign= params.fetch("the_sign").to_sym
+    this_zodiac = all_zodiacs.fetch(@the_sign)
+    @horoscope = this_zodiac.fetch(:horoscope)    
     @array_of_numbers = Array.new
 
     5.times do
@@ -11,7 +15,7 @@ class FireController < ApplicationController
       @array_of_numbers.push(another_number)
     end
 
-    render({ :template => "flame_templates/aries.html.erb" })
+    render({ :template => "fortune_templates/fortunes.html.erb" })
   end
 
   def lion
